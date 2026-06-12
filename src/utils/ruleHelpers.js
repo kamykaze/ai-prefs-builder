@@ -89,8 +89,16 @@ export const SUBCATEGORY_META = {
     title: 'Learning & teaching',
     description: 'Shape how AI helps you learn, not just get answers.',
   },
+  'writing-communication': {
+    title: 'Writing & communication',
+    description: 'Shape how AI drafts and edits your writing.',
+  },
   'domain-specific': {
     title: 'Domain-specific',
     description: 'Practical defaults for your hobbies and interests.',
+  },
+  'voice-dictation': {
+    title: 'Voice & dictation',
+    description: 'Tune how AI talks when it’s reading answers out loud.',
   },
 }

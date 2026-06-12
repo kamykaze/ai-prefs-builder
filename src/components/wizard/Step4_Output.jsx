@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import CopyButton from '../ui/CopyButton'
+import { CHATGPT_LIMIT, classifyLength } from '../../utils/outputLength'
 
 const PASTE_INSTRUCTIONS = [
   {
@@ -14,6 +15,14 @@ const PASTE_INSTRUCTIONS = [
     tool: 'Gemini',
     path: 'Settings → Saved info → “Your instructions for Gemini”',
   },
+  {
+    tool: 'Grok',
+    path: 'Settings → Customize → “Custom instructions” (in the Grok app or on X)',
+  },
+  {
+    tool: 'Perplexity',
+    path: 'Settings → Personalize → “Introduce yourself”',
+  },
 ]
 
 /**
@@ -24,6 +33,7 @@ const PASTE_INSTRUCTIONS = [
 export default function Step4Output({ wizard }) {
   const { generateOutput, reset } = wizard
   const output = useMemo(() => generateOutput(), [generateOutput])
+  const { count, tone } = classifyLength(output)
 
   return (
     <div className="space-y-6">
@@ -44,6 +54,31 @@ export default function Step4Output({ wizard }) {
           You haven’t selected any rules yet. Go back and pick a few, or add your own in
           the previous step.
         </p>
+      )}
+
+      {output && (
+        <div>
+          <p
+            className={`text-right text-sm ${
+              tone === 'over' ? 'font-medium text-amber-700' : 'text-slate-400'
+            }`}
+          >
+            {count.toLocaleString()} characters
+          </p>
+          {tone === 'over' && (
+            <p className="mt-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
+              This is over ChatGPT’s ~{CHATGPT_LIMIT.toLocaleString()}-character
+              custom-instructions limit. It still fits Claude, Gemini, Grok, and most
+              others — for ChatGPT, deselect a few rules or trim your custom text, or
+              paste it at the start of a chat instead.
+            </p>
+          )}
+          {tone === 'near' && (
+            <p className="mt-1 text-right text-sm text-slate-400">
+              Getting close to ChatGPT’s ~{CHATGPT_LIMIT.toLocaleString()}-character limit.
+            </p>
+          )}
+        </div>
       )}
 
       <div className="flex flex-wrap items-center gap-3">
@@ -69,6 +104,10 @@ export default function Step4Output({ wizard }) {
             </li>
           ))}
         </ul>
+        <p className="mt-3 border-t border-slate-100 pt-3 text-sm text-slate-500">
+          Using a tool without a settings field (or one not listed here)? Paste this at
+          the start of a new chat — it works the same way.
+        </p>
       </details>
     </div>
   )

@@ -1,6 +1,7 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { generateOutput as buildOutput } from '../utils/generateOutput'
 import { getDefaultOnRuleIds, TOTAL_STEPS } from '../utils/ruleHelpers'
+import { clearState, loadState, saveState } from '../utils/persistence'
 
 const initialContext = {
   professions: [],
@@ -11,14 +12,37 @@ const initialContext = {
 
 /**
  * Central wizard state + actions (spec State Shape).
- * Holds everything locally — nothing is persisted anywhere.
+ * Selections are persisted to localStorage so a returning user resumes their work;
+ * `reset()` clears them back to defaults. Nothing leaves the browser.
  */
 export function useWizardState() {
-  const [context, setContextState] = useState(initialContext)
-  const [selectedRuleIds, setSelectedRuleIds] = useState(() => getDefaultOnRuleIds())
-  const [conflictSelections, setConflictSelections] = useState({})
-  const [customRules, setCustomRules] = useState('')
-  const [currentStep, setCurrentStep] = useState(0)
+  // Read any saved state once, lazily, before seeding the individual slices.
+  const [persisted] = useState(loadState)
+
+  const [context, setContextState] = useState(
+    () => persisted?.context ?? initialContext,
+  )
+  const [selectedRuleIds, setSelectedRuleIds] = useState(() =>
+    persisted?.selectedRuleIds
+      ? new Set(persisted.selectedRuleIds)
+      : getDefaultOnRuleIds(),
+  )
+  const [conflictSelections, setConflictSelections] = useState(
+    () => persisted?.conflictSelections ?? {},
+  )
+  const [customRules, setCustomRules] = useState(() => persisted?.customRules ?? '')
+  const [currentStep, setCurrentStep] = useState(() => persisted?.currentStep ?? 0)
+
+  // Persist on every change. The Set is serialized as an array.
+  useEffect(() => {
+    saveState({
+      context,
+      selectedRuleIds: [...selectedRuleIds],
+      conflictSelections,
+      customRules,
+      currentStep,
+    })
+  }, [context, selectedRuleIds, conflictSelections, customRules, currentStep])
 
   // Step 0 updates one context field at a time (e.g. setContext('professions', [...])).
   const setContext = useCallback((field, value) => {
@@ -46,6 +70,7 @@ export function useWizardState() {
   }, [])
 
   const reset = useCallback(() => {
+    clearState()
     setContextState(initialContext)
     setSelectedRuleIds(getDefaultOnRuleIds())
     setConflictSelections({})
