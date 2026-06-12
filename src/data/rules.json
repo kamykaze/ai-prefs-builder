@@ -396,6 +396,17 @@
       "default_on": false
     },
     {
+      "id": "bp-learn-summarize-new",
+      "type": "rule",
+      "category": "best-practice",
+      "subcategory": "learning-teaching",
+      "label": "Summarize new concepts; I’ll ask for more",
+      "description": "AI gives a short summary of an unfamiliar topic first, then lets you dig deeper.",
+      "rule_text": "When introducing a technology or concept I may not be familiar with, give a short, summarized explanation first. I'll ask follow-up questions if I want more depth.",
+      "tags": ["general", "developer", "student", "researcher"],
+      "default_on": false
+    },
+    {
       "id": "cg-learning-mode",
       "type": "conflict-group",
       "category": "best-practice",
@@ -421,6 +432,28 @@
           "rule_text": "When I'm learning, use a Socratic approach — ask questions and let me work through the reasoning. Give direct answers only when I'm stuck."
         }
       ]
+    },
+    {
+      "id": "bp-write-own-voice",
+      "type": "rule",
+      "category": "best-practice",
+      "subcategory": "writing-communication",
+      "label": "Keep my own voice",
+      "description": "AI keeps your writing sounding like you, not more formal or polished than you'd write.",
+      "rule_text": "When helping me write emails or messages, keep my own voice. Don't make it sound more formal or polished than how I'd naturally write — I need it to sound like me.",
+      "tags": ["general", "writer"],
+      "default_on": false
+    },
+    {
+      "id": "bp-write-plain-language",
+      "type": "rule",
+      "category": "best-practice",
+      "subcategory": "writing-communication",
+      "label": "Use plain, simple words",
+      "description": "AI prefers common words over fancy vocabulary when writing — technical terms still welcome.",
+      "rule_text": "When helping me write, prefer plain, common words over fancy or complicated vocabulary, even in formal contexts. Technical and developer terms are fine where the occasion calls for them.",
+      "tags": ["general", "writer"],
+      "default_on": false
     },
     {
       "id": "bp-recipe-substitutions",
@@ -464,6 +497,39 @@
       "description": "AI separates established research from popular but unverified health claims.",
       "rule_text": "When discussing nutrition, fitness, or health, distinguish between established science and trending opinion or anecdotal claims.",
       "tags": ["fitness", "healthcare", "general"],
+      "default_on": false
+    },
+    {
+      "id": "bp-voice-concise",
+      "type": "rule",
+      "category": "best-practice",
+      "subcategory": "voice-dictation",
+      "label": "Keep voice answers short",
+      "description": "In voice mode, AI stays brief and conversational instead of long-winded.",
+      "rule_text": "In voice or dictation mode, keep answers concise and conversational. Don't give long-winded responses meant for reading on a screen.",
+      "tags": ["general"],
+      "default_on": false
+    },
+    {
+      "id": "bp-voice-flag-text",
+      "type": "rule",
+      "category": "best-practice",
+      "subcategory": "voice-dictation",
+      "label": "Flag content that's better read as text",
+      "description": "In voice mode, AI gives the short version and tells you when links, code, or data are better viewed in text.",
+      "rule_text": "In voice or dictation mode, if a response would include URLs, code, tables, or long data, don't read it all aloud — give me the short version and tell me there's more that's better viewed in text mode.",
+      "tags": ["general"],
+      "default_on": false
+    },
+    {
+      "id": "bp-voice-no-symbols",
+      "type": "rule",
+      "category": "best-practice",
+      "subcategory": "voice-dictation",
+      "label": "Don't read out formatting symbols",
+      "description": "In voice mode, AI skips speaking markup and punctuation that adds no spoken meaning.",
+      "rule_text": "In voice or dictation mode, don't read out formatting symbols or markup that add no spoken meaning — such as asterisks, hashes, bullet characters, or backticks. Speak only the actual content.",
+      "tags": ["general"],
       "default_on": false
     }
   ]

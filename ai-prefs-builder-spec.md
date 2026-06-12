@@ -8,7 +8,9 @@ Most people don't know AI behavioral problems exist, and even those who do don't
 
 **Audience:** General users — not just developers. Think non-technical users who want better AI behavior without learning prompt engineering. Design and copy should reflect that.
 
-**Platform:** Fully static. No backend, no login, no data stored anywhere. Deployable to GitHub Pages.
+**Platform:** Fully static. No backend, no login, no server-side storage. Selections are
+persisted to the browser's `localStorage` so a returning user resumes their work; nothing
+is ever uploaded. Deployable to GitHub Pages.
 
 ---
 
@@ -24,7 +26,9 @@ Most people don't know AI behavioral problems exist, and even those who do don't
 | Deployment | GitHub Pages |
 | Package manager | npm |
 
-No backend. No API calls. No cookies or localStorage required (stateless per session is fine for v1).
+No backend. No API calls. Wizard selections are saved to `localStorage` (browser-only)
+so progress survives a refresh or revisit; a "Start over" control clears them back to
+defaults.
 
 ---
 
@@ -131,7 +135,12 @@ If the user skipped Step 0, show all best practices.
 2. **Time & data freshness** — *"Flag when information might be outdated or needs live verification"*
 3. **Professional precision** — *"Surface important considerations specific to your field"*
 4. **Learning & teaching** — *"Shape how AI helps you learn, not just get answers"*
-5. **Domain-specific** — *"Practical defaults for your hobbies and interests"*
+5. **Writing & communication** — *"Shape how AI drafts and edits your writing"* (tagged `general`/`writer`, all opt-in)
+6. **Domain-specific** — *"Practical defaults for your hobbies and interests"*
+7. **Voice & dictation** — *"Tune how AI talks when it's reading answers out loud"* (tagged `general`, all opt-in)
+
+> Note: `src/data/rules.json` is the canonical rule taxonomy and may have grown beyond the
+> seed JSON in the "Full Rule Data" section below. The schema there still applies.
 
 **Conflict Group in this step:**
 
@@ -142,9 +151,11 @@ If the user skipped Step 0, show all best practices.
 ### Step 3 — Custom Rules
 *"Anything else? Add your own rules."*
 
-A plain `<textarea>` where users can type additional instructions in their own words. These get appended to the bottom of the output blob as-is.
+A plain `<textarea>` where users can type additional instructions — or a few facts about
+themselves that help AI respond the way they want (e.g. "I'm a non-native English speaker").
+These get appended to the bottom of the output blob as-is.
 
-- Placeholder text: *"e.g. Always respond in Spanish. When reviewing my writing, focus on structure before grammar."*
+- Placeholder text: *"e.g. I'm a non-native English speaker, so keep wording simple. Always respond in metric units. I use TickTick for my to-do lists."*
 - Character counter (soft limit guidance, not enforced — different AI tools have different limits)
 - No validation — free-form
 
@@ -878,7 +889,7 @@ Install `gh-pages` as a dev dependency. Push to `main`, run `npm run deploy`.
 
 ## Out of Scope for v1
 
-- User accounts or saved preferences
+- User accounts or server-side saved preferences (local browser persistence is in v1)
 - Sharing a configuration via URL (nice v2 feature — encode state in URL params)
 - Community-submitted rules
 - Conflict detection between custom rules and selected rules

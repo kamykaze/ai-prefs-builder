@@ -37,7 +37,11 @@ The wizard is a single page with five steps:
 3. **Custom** — your own free-text rules, appended verbatim.
 4. **Output** — the generated, numbered preferences block with a copy button.
 
-All state is local to the browser session — there is no backend and nothing is persisted.
+As you make selections, a **live preview** of the generated blob updates in real time
+(side panel on wide screens, a collapsible panel on mobile) so you can see exactly what's
+being added. Your selections are saved in the browser's `localStorage`, so refreshing or
+revisiting picks up where you left off — a **"Start over"** control clears everything back
+to defaults. There is no backend and nothing is ever uploaded.
 
 ## Contributing new rules
 

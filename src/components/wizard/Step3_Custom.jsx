@@ -12,7 +12,8 @@ export default function Step3Custom({ wizard }) {
       <header>
         <h2 className="text-2xl font-bold text-slate-900">Anything else?</h2>
         <p className="mt-1 text-slate-500">
-          Add your own rules in plain language. We’ll tack them onto the end as-is.
+          Add your own rules — or a few facts about yourself that help AI respond the
+          way you want. We’ll include them as-is.
         </p>
       </header>
 
@@ -21,7 +22,9 @@ export default function Step3Custom({ wizard }) {
           value={customRules}
           onChange={(e) => setCustomRules(e.target.value)}
           rows={8}
-          placeholder="e.g. Always respond in Spanish. When reviewing my writing, focus on structure before grammar."
+          placeholder={
+            "e.g. I'm a non-native English speaker, so keep wording simple.\nAlways respond in metric units.\nI use TickTick for my to-do lists."
+          }
           className="w-full resize-y rounded-lg border border-slate-300 bg-white p-4 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
         />
         <p className="mt-1.5 text-right text-sm text-slate-400">
