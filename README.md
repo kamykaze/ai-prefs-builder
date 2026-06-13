@@ -9,8 +9,7 @@ behave, and copy a ready-to-paste text blob. No account, no tracking, nothing st
 
 ## Live demo
 
-_Add your GitHub Pages URL here once deployed:_
-`https://<your-username>.github.io/ai-prefs-builder/`
+**[kamykaze.github.io/ai-prefs-builder](https://kamykaze.github.io/ai-prefs-builder/)**
 
 ## Run locally
 
