@@ -1,6 +1,5 @@
 import StepIndicator from './ui/StepIndicator'
 import PreviewPanel from './ui/PreviewPanel'
-import StartOver from './ui/StartOver'
 import Intro from './wizard/Intro'
 import Step0Context from './wizard/Step0_Context'
 import Step1Guardrails from './wizard/Step1_Guardrails'
@@ -89,13 +88,11 @@ export default function WizardShell({ wizard }) {
             totalSteps={TOTAL_STEPS}
             onStepClick={setStep}
           />
-          <StartOver onReset={handleReset} />
           {showPreview && <PreviewPanel wizard={wizard} />}
         </aside>
 
         <div>
-          {/* Start over + collapsible preview for narrow screens, above the form. */}
-          <StartOver onReset={handleReset} className="mb-4 lg:hidden" />
+          {/* Collapsible preview for narrow screens, above the form. */}
           {showPreview && (
             <div className="mb-4 lg:hidden">
               <PreviewPanel wizard={wizard} collapsible />
@@ -106,21 +103,16 @@ export default function WizardShell({ wizard }) {
             <StepComponent wizard={wizard} />
           </main>
 
-          <nav className="mt-6 flex items-center justify-between gap-3">
+          <nav className="mt-6 flex items-center gap-3">
             <button
               type="button"
-              onClick={goBack}
-              disabled={isFirst}
-              className={`inline-flex items-center justify-center rounded-lg px-5 py-2.5 font-medium transition-colors ${
-                isFirst
-                  ? 'invisible'
-                  : 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
-              }`}
+              onClick={handleReset}
+              className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 font-medium text-slate-600 transition-colors hover:bg-slate-50"
             >
-              Back
+              Start over
             </button>
 
-            <div className="flex items-center gap-3">
+            <div className="ml-auto flex items-center gap-3">
               {isFirst && (
                 <button
                   type="button"
@@ -128,6 +120,15 @@ export default function WizardShell({ wizard }) {
                   className="text-sm font-medium text-slate-500 underline-offset-2 hover:text-slate-700 hover:underline"
                 >
                   Skip for now
+                </button>
+              )}
+              {!isFirst && (
+                <button
+                  type="button"
+                  onClick={goBack}
+                  className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 font-medium text-slate-700 transition-colors hover:bg-slate-50"
+                >
+                  Back
                 </button>
               )}
               {!isLast && (
