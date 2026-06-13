@@ -92,6 +92,19 @@
       "default_on": true
     },
     {
+      "id": "guard-halluc-ask-when-ambiguous",
+      "type": "rule",
+      "category": "guardrail",
+      "subcategory": "hallucination",
+      "label": "Ask when my request is unclear",
+      "description": "AI asks a clarifying question instead of guessing when your request is ambiguous.",
+      "rule_text": "When my request is ambiguous or could mean several things, ask a clarifying question instead of guessing what I meant.",
+      "tags": [
+        "universal"
+      ],
+      "default_on": false
+    },
+    {
       "id": "guard-halluc-confidence-levels",
       "type": "rule",
       "category": "guardrail",
