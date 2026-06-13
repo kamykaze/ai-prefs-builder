@@ -33,7 +33,8 @@ export function generateOutput({ selectedRuleIds, conflictSelections, customRule
         continue
       }
       const option = entry.options[optionIndex]
-      if (option) {
+      // A "No preference" option has empty rule_text — selecting it emits nothing.
+      if (option && option.rule_text.trim() !== '') {
         lines.push(option.rule_text)
       }
     }

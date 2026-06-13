@@ -11,7 +11,7 @@ export default function ConflictGroup({ group, selectedOption, onSelect }) {
     <fieldset className="rounded-lg border border-slate-200 bg-white p-4">
       <legend className="px-1 font-medium text-slate-900">{group.label}</legend>
       <p className="mb-3 text-sm text-slate-500">{group.description}</p>
-      <div className="grid gap-2 sm:grid-cols-3">
+      <div className="grid gap-2 sm:grid-cols-2">
         {group.options.map((option, index) => {
           const isActive = active === index
           return (

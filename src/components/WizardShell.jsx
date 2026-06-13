@@ -1,5 +1,7 @@
 import StepIndicator from './ui/StepIndicator'
 import PreviewPanel from './ui/PreviewPanel'
+import StartOver from './ui/StartOver'
+import Intro from './wizard/Intro'
 import Step0Context from './wizard/Step0_Context'
 import Step1Guardrails from './wizard/Step1_Guardrails'
 import Step2BestPractices from './wizard/Step2_BestPractices'
@@ -54,16 +56,6 @@ export default function WizardShell({ wizard }) {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
-      <div className="mb-2 flex justify-end">
-        <button
-          type="button"
-          onClick={handleReset}
-          className="text-sm font-medium text-slate-400 underline-offset-2 hover:text-slate-600 hover:underline"
-        >
-          Start over
-        </button>
-      </div>
-
       <header className="mb-8 text-center">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">
           AI Preferences Builder
@@ -73,6 +65,11 @@ export default function WizardShell({ wizard }) {
           paste it into Claude, ChatGPT, Gemini, or anywhere else.
         </p>
       </header>
+
+      {/* Collapsed-by-default explainer, available on every step. */}
+      <div className="mb-6">
+        <Intro />
+      </div>
 
       {/* Narrow screens: compact progress bar instead of the tall sidebar. */}
       <StepIndicator
@@ -92,11 +89,13 @@ export default function WizardShell({ wizard }) {
             totalSteps={TOTAL_STEPS}
             onStepClick={setStep}
           />
+          <StartOver onReset={handleReset} />
           {showPreview && <PreviewPanel wizard={wizard} />}
         </aside>
 
         <div>
-          {/* Collapsible preview for narrow screens, above the form. */}
+          {/* Start over + collapsible preview for narrow screens, above the form. */}
+          <StartOver onReset={handleReset} className="mb-4 lg:hidden" />
           {showPreview && (
             <div className="mb-4 lg:hidden">
               <PreviewPanel wizard={wizard} collapsible />
