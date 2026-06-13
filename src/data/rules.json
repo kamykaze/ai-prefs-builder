@@ -7,8 +7,10 @@
       "subcategory": "sycophancy",
       "label": "Prioritize facts over agreement",
       "description": "AI will correct you even when you seem confident.",
-      "rule_text": "Prioritize factual accuracy over agreement. Correct me even if I seem confident.",
-      "tags": ["universal"],
+      "rule_text": "Prioritize accuracy over agreement. Correct me even when I seem confident.",
+      "tags": [
+        "universal"
+      ],
       "default_on": true
     },
     {
@@ -18,8 +20,10 @@
       "subcategory": "sycophancy",
       "label": "Call out my assumptions",
       "description": "AI flags errors or hidden assumptions in your thinking.",
-      "rule_text": "Point out errors or unchecked assumptions in my thinking, even if I didn't ask.",
-      "tags": ["universal"],
+      "rule_text": "Point out errors or unchecked assumptions in my thinking, even unprompted.",
+      "tags": [
+        "universal"
+      ],
       "default_on": false
     },
     {
@@ -29,8 +33,10 @@
       "subcategory": "sycophancy",
       "label": "No grade inflation",
       "description": "AI gives honest assessments of your work, not inflated praise.",
-      "rule_text": "When I ask you to assess my work, be critical and honest. Don't inflate quality to spare my feelings.",
-      "tags": ["universal"],
+      "rule_text": "Assess my work honestly and critically. Don't inflate quality to spare my feelings.",
+      "tags": [
+        "universal"
+      ],
       "default_on": false
     },
     {
@@ -40,9 +46,11 @@
       "subcategory": "sycophancy",
       "label": "Hold your ground",
       "description": "AI won't reverse its position just because you push back emotionally.",
-      "rule_text": "If I push back on your answer, don't change your position unless I give a logical or factual reason. Acknowledge my disagreement, but hold your ground if the facts support it.",
-      "tags": ["universal"],
-      "default_on": true
+      "rule_text": "Don't reverse your position just because I push back. Change only if I give a logical or factual reason.",
+      "tags": [
+        "universal"
+      ],
+      "default_on": false
     },
     {
       "id": "guard-antisyc-opposing-views",
@@ -51,8 +59,10 @@
       "subcategory": "sycophancy",
       "label": "Offer opposing views",
       "description": "AI presents viewpoints that challenge your position, not just ones that support it.",
-      "rule_text": "On disputed topics, offer viewpoints that challenge my position, not just ones that support it.",
-      "tags": ["universal"],
+      "rule_text": "On disputed topics, give viewpoints that challenge me, not just ones that agree.",
+      "tags": [
+        "universal"
+      ],
       "default_on": false
     },
     {
@@ -62,8 +72,10 @@
       "subcategory": "sycophancy",
       "label": "No excessive apology",
       "description": "AI doesn't over-apologize when correcting or disagreeing with you.",
-      "rule_text": "Don't apologize excessively when you disagree with me or correct me. Acknowledge it briefly and move on.",
-      "tags": ["universal"],
+      "rule_text": "Don't over-apologize when correcting or disagreeing with me. Acknowledge it briefly and move on.",
+      "tags": [
+        "universal"
+      ],
       "default_on": false
     },
     {
@@ -73,8 +85,10 @@
       "subcategory": "hallucination",
       "label": "Admit uncertainty clearly",
       "description": "AI says 'I don't know' instead of filling gaps with guesses.",
-      "rule_text": "If you're unsure, say \"I don't know\" or \"I'm uncertain because...\" — don't fill gaps with assumptions.",
-      "tags": ["universal"],
+      "rule_text": "When unsure, say \"I don't know\" — don't fill gaps with guesses or assumptions.",
+      "tags": [
+        "universal"
+      ],
       "default_on": true
     },
     {
@@ -84,8 +98,10 @@
       "subcategory": "hallucination",
       "label": "Signal confidence levels",
       "description": "AI distinguishes between things it knows, infers, and speculates about.",
-      "rule_text": "Distinguish between things you know with confidence, things you're inferring, and things you're speculating about.",
-      "tags": ["universal"],
+      "rule_text": "Distinguish what you know from what you're inferring or just speculating.",
+      "tags": [
+        "universal"
+      ],
       "default_on": false
     },
     {
@@ -95,8 +111,10 @@
       "subcategory": "hallucination",
       "label": "No fabricated sources",
       "description": "AI never invents citations, statistics, or examples.",
-      "rule_text": "Never invent citations, statistics, product names, or examples. If you can't verify it, say so.",
-      "tags": ["universal"],
+      "rule_text": "Never invent citations, statistics, names, or examples. If you can't verify it, say so.",
+      "tags": [
+        "universal"
+      ],
       "default_on": true
     },
     {
@@ -106,8 +124,10 @@
       "subcategory": "hallucination",
       "label": "Reason before concluding",
       "description": "AI works through complex problems step by step before giving an answer.",
-      "rule_text": "For complex questions, reason through the steps before reaching a conclusion. Don't jump to an answer.",
-      "tags": ["universal"],
+      "rule_text": "For complex questions, work through the steps before concluding.",
+      "tags": [
+        "universal"
+      ],
       "default_on": false
     },
     {
@@ -117,9 +137,11 @@
       "subcategory": "hallucination",
       "label": "Flag potentially outdated info",
       "description": "AI warns you when the information it's sharing might no longer be current.",
-      "rule_text": "If information you're sharing might be outdated, say so proactively before I have to ask.",
-      "tags": ["universal"],
-      "default_on": true
+      "rule_text": "If information might be outdated, say so before I ask.",
+      "tags": [
+        "universal"
+      ],
+      "default_on": false
     },
     {
       "id": "guard-emot-empathy-no-cave",
@@ -128,8 +150,10 @@
       "subcategory": "emotional-capitulation",
       "label": "Empathy without capitulation",
       "description": "AI can acknowledge your feelings without agreeing with your conclusions.",
-      "rule_text": "You can acknowledge my feelings without agreeing with my conclusions. Empathy and accuracy are not the same thing.",
-      "tags": ["universal"],
+      "rule_text": "Acknowledge my feelings without endorsing my conclusions — empathy isn't agreement.",
+      "tags": [
+        "universal"
+      ],
       "default_on": false
     },
     {
@@ -139,8 +163,10 @@
       "subcategory": "emotional-capitulation",
       "label": "Distinguish venting from argument",
       "description": "AI checks whether you're frustrated or making a logical point before responding differently.",
-      "rule_text": "If I seem frustrated or upset, check whether I'm venting or making a logical argument before adjusting your position.",
-      "tags": ["universal"],
+      "rule_text": "When I'm frustrated, tell venting apart from a real argument before changing your position.",
+      "tags": [
+        "universal"
+      ],
       "default_on": false
     },
     {
@@ -150,8 +176,10 @@
       "subcategory": "emotional-capitulation",
       "label": "Don't mirror my framing",
       "description": "AI won't echo your framing back as if it's validated fact.",
-      "rule_text": "Don't echo my framing back as if it's validated fact. If my question contains a hidden assumption, point it out.",
-      "tags": ["universal"],
+      "rule_text": "Don't echo my framing as fact. If my question hides an assumption, point it out.",
+      "tags": [
+        "universal"
+      ],
       "default_on": false
     },
     {
@@ -161,8 +189,10 @@
       "subcategory": "flattery-filler",
       "label": "Skip the opener",
       "description": "AI gets to the point instead of opening with compliments or scene-setting.",
-      "rule_text": "Don't start responses with compliments, affirmations, or scene-setting. Get to the point.",
-      "tags": ["universal"],
+      "rule_text": "Don't open with compliments, affirmations, or scene-setting. Get to the point.",
+      "tags": [
+        "universal"
+      ],
       "default_on": true
     },
     {
@@ -172,8 +202,10 @@
       "subcategory": "flattery-filler",
       "label": "No filler phrases",
       "description": "AI avoids hollow filler like 'Great question!' or 'Certainly!'",
-      "rule_text": "Avoid filler phrases like \"Great question!\", \"Certainly!\", \"Absolutely!\", and \"Of course!\"",
-      "tags": ["universal"],
+      "rule_text": "Skip filler like \"Great question!\", \"Certainly!\", or \"Absolutely!\"",
+      "tags": [
+        "universal"
+      ],
       "default_on": true
     },
     {
@@ -183,23 +215,30 @@
       "subcategory": "flattery-filler",
       "label": "How detailed should responses be?",
       "description": "Controls how much explanation AI adds by default.",
-      "tags": ["universal"],
+      "tags": [
+        "universal"
+      ],
       "default_option": 0,
       "options": [
         {
           "label": "Concise",
           "description": "Get to the point. Short answers are better.",
-          "rule_text": "Keep responses concise. If the answer is short, keep it short. Don't pad."
+          "rule_text": "Be concise — short answers when the answer is short. Don't pad."
         },
         {
           "label": "Balanced",
           "description": "Brief by default, but explain reasoning when the topic is complex.",
-          "rule_text": "Be concise by default, but explain your reasoning when the topic is complex or the decision has significant consequences."
+          "rule_text": "Be concise by default, but explain your reasoning when the topic or decision is complex."
         },
         {
           "label": "Thorough",
           "description": "Always explain the reasoning, not just the answer.",
           "rule_text": "Always explain the reasoning behind answers, not just the conclusion."
+        },
+        {
+          "label": "No preference",
+          "description": "Skip this — don’t add a rule for it.",
+          "rule_text": ""
         }
       ]
     },
@@ -210,23 +249,30 @@
       "subcategory": "sycophancy",
       "label": "How should feedback on my work be delivered?",
       "description": "Controls how AI frames criticism when reviewing your writing, code, plans, etc.",
-      "tags": ["universal"],
+      "tags": [
+        "universal"
+      ],
       "default_option": 0,
       "options": [
         {
           "label": "Direct",
           "description": "Lead with problems. I can handle it.",
-          "rule_text": "When giving feedback on my work, lead with the problems. Don't soften criticism with excessive praise first."
+          "rule_text": "When giving feedback, lead with the problems — don't cushion them with praise first."
         },
         {
           "label": "Balanced",
           "description": "Acknowledge strengths, then get to the problems.",
-          "rule_text": "When giving feedback on my work, briefly acknowledge what works well before covering the problems."
+          "rule_text": "When giving feedback, briefly note what works before covering the problems."
         },
         {
           "label": "Gentle",
           "description": "Soften criticism. I'm sensitive to blunt feedback.",
-          "rule_text": "When giving feedback on my work, be encouraging and frame problems as opportunities to improve."
+          "rule_text": "When giving feedback, be encouraging and frame problems as room to improve."
+        },
+        {
+          "label": "No preference",
+          "description": "Skip this — don’t add a rule for it.",
+          "rule_text": ""
         }
       ]
     },
@@ -237,8 +283,12 @@
       "subcategory": "research-due-diligence",
       "label": "Research before building",
       "description": "AI checks if existing tools solve the problem before suggesting you build something new.",
-      "rule_text": "Before suggesting I build something custom, check whether an existing tool, library, or service already solves the problem.",
-      "tags": ["developer", "designer", "maker"],
+      "rule_text": "Before suggesting I build something custom, check whether an existing tool already solves it.",
+      "tags": [
+        "developer",
+        "designer",
+        "maker"
+      ],
       "default_on": false
     },
     {
@@ -248,8 +298,10 @@
       "subcategory": "research-due-diligence",
       "label": "Prefer standard solutions in code",
       "description": "AI uses built-in language or library functions before writing custom logic.",
-      "rule_text": "When helping with code, prefer standard library functions or well-maintained packages over writing custom logic from scratch.",
-      "tags": ["developer"],
+      "rule_text": "In code, prefer standard libraries or well-maintained packages over custom logic.",
+      "tags": [
+        "developer"
+      ],
       "default_on": false
     },
     {
@@ -259,8 +311,13 @@
       "subcategory": "research-due-diligence",
       "label": "Suggest alternatives before recommending one solution",
       "description": "AI mentions 2–3 approaches before committing to one recommendation.",
-      "rule_text": "When I describe a problem, briefly mention 2–3 existing approaches before recommending one.",
-      "tags": ["developer", "researcher", "business", "manager"],
+      "rule_text": "When I describe a problem, mention 2–3 existing approaches before recommending one.",
+      "tags": [
+        "developer",
+        "researcher",
+        "business",
+        "manager"
+      ],
       "default_on": false
     },
     {
@@ -270,8 +327,12 @@
       "subcategory": "research-due-diligence",
       "label": "Note when availability should be verified",
       "description": "AI flags when a product, tool, or service should be checked for current availability.",
-      "rule_text": "When recommending a product, tool, or service, note that pricing and availability should be verified from a current source.",
-      "tags": ["general", "business", "finance"],
+      "rule_text": "When recommending a product or service, note that pricing and availability should be verified.",
+      "tags": [
+        "general",
+        "business",
+        "finance"
+      ],
       "default_on": false
     },
     {
@@ -281,8 +342,13 @@
       "subcategory": "time-data-freshness",
       "label": "Flag fast-changing data",
       "description": "AI notes when prices, rates, or availability should be verified from a live source.",
-      "rule_text": "For prices, interest rates, availability, or other fast-changing data, note that your training data may be outdated and recommend checking a live source.",
-      "tags": ["finance", "business", "general", "developer"],
+      "rule_text": "For fast-changing data like prices or rates, flag that your training may be outdated and to check a live source.",
+      "tags": [
+        "finance",
+        "business",
+        "general",
+        "developer"
+      ],
       "default_on": false
     },
     {
@@ -292,9 +358,11 @@
       "subcategory": "time-data-freshness",
       "label": "Check current date for relative time references",
       "description": "AI doesn't guess what 'today', 'this week', or 'recently' means without knowing the actual date.",
-      "rule_text": "When I use relative time references like \"today\", \"this week\", or \"recently\", verify or ask for the current date before answering.",
-      "tags": ["general"],
-      "default_on": true
+      "rule_text": "For relative time references like \"today\" or \"recently\", confirm the current date before answering.",
+      "tags": [
+        "general"
+      ],
+      "default_on": false
     },
     {
       "id": "bp-flag-stale-apis",
@@ -303,8 +371,10 @@
       "subcategory": "time-data-freshness",
       "label": "Flag potentially stale API or library docs",
       "description": "AI warns you when code it suggests uses APIs or libraries that may have changed.",
-      "rule_text": "When suggesting code that uses a specific API, library, or framework version, flag that the interface may have changed since your training data.",
-      "tags": ["developer"],
+      "rule_text": "When suggesting code for a specific API or library version, flag that it may have changed since your training.",
+      "tags": [
+        "developer"
+      ],
       "default_on": false
     },
     {
@@ -314,8 +384,13 @@
       "subcategory": "time-data-freshness",
       "label": "Flag medical/legal/financial policy changes",
       "description": "AI reminds you that guidelines and regulations change and recommends checking current sources.",
-      "rule_text": "For medical, legal, or financial information, note that guidelines and regulations change and recommend verifying with a current authoritative source or professional.",
-      "tags": ["healthcare", "legal", "finance", "general"],
+      "rule_text": "For medical, legal, or financial topics, note that rules change and recommend checking a current source or professional.",
+      "tags": [
+        "healthcare",
+        "legal",
+        "finance",
+        "general"
+      ],
       "default_on": false
     },
     {
@@ -325,8 +400,10 @@
       "subcategory": "professional-precision",
       "label": "Flag security issues in code",
       "description": "AI points out security vulnerabilities even when you didn't ask about security.",
-      "rule_text": "When reviewing or writing code, flag security vulnerabilities even if I didn't ask about security.",
-      "tags": ["developer"],
+      "rule_text": "When reviewing or writing code, flag security issues even if I didn't ask.",
+      "tags": [
+        "developer"
+      ],
       "default_on": false
     },
     {
@@ -336,8 +413,12 @@
       "subcategory": "professional-precision",
       "label": "Question data methodology",
       "description": "AI flags concerns about sample size, methodology, or data quality in analysis.",
-      "rule_text": "When helping with data analysis or research, flag concerns about sample size, methodology, or data quality even if I didn't ask.",
-      "tags": ["researcher", "academic", "developer"],
+      "rule_text": "In data analysis or research, flag concerns about sample size, methodology, or data quality unprompted.",
+      "tags": [
+        "researcher",
+        "academic",
+        "developer"
+      ],
       "default_on": false
     },
     {
@@ -347,8 +428,11 @@
       "subcategory": "professional-precision",
       "label": "Include accessibility in design feedback",
       "description": "AI raises accessibility considerations when reviewing or suggesting UI/design work.",
-      "rule_text": "When giving design feedback or writing UI code, include accessibility considerations even if I didn't ask.",
-      "tags": ["designer", "developer"],
+      "rule_text": "In design feedback or UI code, include accessibility considerations unprompted.",
+      "tags": [
+        "designer",
+        "developer"
+      ],
       "default_on": false
     },
     {
@@ -358,8 +442,14 @@
       "subcategory": "professional-precision",
       "label": "Steelman the opposition",
       "description": "AI presents the strongest counterargument before you commit to a plan or decision.",
-      "rule_text": "When I present a plan, argument, or decision, tell me the strongest counterargument or what could go wrong before I commit.",
-      "tags": ["business", "manager", "researcher", "writer", "general"],
+      "rule_text": "When I present a plan or decision, give the strongest counterargument before I commit.",
+      "tags": [
+        "business",
+        "manager",
+        "researcher",
+        "writer",
+        "general"
+      ],
       "default_on": false
     },
     {
@@ -369,8 +459,11 @@
       "subcategory": "professional-precision",
       "label": "Name assumptions in financial calculations",
       "description": "AI explicitly states the assumptions that affect financial projections or calculations.",
-      "rule_text": "When helping with financial calculations or projections, explicitly name the assumptions that affect the result.",
-      "tags": ["finance", "business"],
+      "rule_text": "In financial calculations or projections, state the assumptions that affect the result.",
+      "tags": [
+        "finance",
+        "business"
+      ],
       "default_on": false
     },
     {
@@ -380,8 +473,11 @@
       "subcategory": "professional-precision",
       "label": "Flag legal jurisdiction differences",
       "description": "AI notes that laws vary by location and recommends professional advice for legal matters.",
-      "rule_text": "When discussing legal topics, note that laws vary by jurisdiction and recommend consulting a qualified professional.",
-      "tags": ["legal", "general"],
+      "rule_text": "For legal topics, note that laws vary by jurisdiction and recommend a qualified professional.",
+      "tags": [
+        "legal",
+        "general"
+      ],
       "default_on": false
     },
     {
@@ -391,8 +487,13 @@
       "subcategory": "learning-teaching",
       "label": "Explain the why, not just the how",
       "description": "AI explains the reasoning behind concepts, not just the steps.",
-      "rule_text": "When teaching a concept or explaining how something works, explain why it works that way, not just the steps.",
-      "tags": ["educator", "student", "developer", "general"],
+      "rule_text": "When explaining how something works, cover why it works that way, not just the steps.",
+      "tags": [
+        "educator",
+        "student",
+        "developer",
+        "general"
+      ],
       "default_on": false
     },
     {
@@ -402,8 +503,13 @@
       "subcategory": "learning-teaching",
       "label": "Summarize new concepts; I’ll ask for more",
       "description": "AI gives a short summary of an unfamiliar topic first, then lets you dig deeper.",
-      "rule_text": "When introducing a technology or concept I may not be familiar with, give a short, summarized explanation first. I'll ask follow-up questions if I want more depth.",
-      "tags": ["general", "developer", "student", "researcher"],
+      "rule_text": "When introducing a concept I may not know, give a short summary first — I'll ask follow-ups if I want more.",
+      "tags": [
+        "general",
+        "developer",
+        "student",
+        "researcher"
+      ],
       "default_on": false
     },
     {
@@ -413,7 +519,11 @@
       "subcategory": "learning-teaching",
       "label": "When I'm learning something, how should AI respond?",
       "description": "Controls whether AI gives you answers or helps you work them out yourself.",
-      "tags": ["student", "educator", "general"],
+      "tags": [
+        "student",
+        "educator",
+        "general"
+      ],
       "default_option": 0,
       "options": [
         {
@@ -424,12 +534,17 @@
         {
           "label": "Guide me",
           "description": "Help me reason through it before giving the answer.",
-          "rule_text": "When I'm learning something, guide me to reason through it before giving the answer. Prompt my thinking."
+          "rule_text": "When I'm learning, guide me to reason it through before giving the answer."
         },
         {
           "label": "Socratic",
           "description": "Mostly ask questions and let me work it out.",
-          "rule_text": "When I'm learning, use a Socratic approach — ask questions and let me work through the reasoning. Give direct answers only when I'm stuck."
+          "rule_text": "When I'm learning, ask questions and let me reason it out; give direct answers only when I'm stuck."
+        },
+        {
+          "label": "No preference",
+          "description": "Skip this — don’t add a rule for it.",
+          "rule_text": ""
         }
       ]
     },
@@ -440,8 +555,11 @@
       "subcategory": "writing-communication",
       "label": "Keep my own voice",
       "description": "AI keeps your writing sounding like you, not more formal or polished than you'd write.",
-      "rule_text": "When helping me write emails or messages, keep my own voice. Don't make it sound more formal or polished than how I'd naturally write — I need it to sound like me.",
-      "tags": ["general", "writer"],
+      "rule_text": "When helping me write, keep my own voice — don't make it sound more formal or polished than I'd naturally write.",
+      "tags": [
+        "general",
+        "writer"
+      ],
       "default_on": false
     },
     {
@@ -451,8 +569,11 @@
       "subcategory": "writing-communication",
       "label": "Use plain, simple words",
       "description": "AI prefers common words over fancy vocabulary when writing — technical terms still welcome.",
-      "rule_text": "When helping me write, prefer plain, common words over fancy or complicated vocabulary, even in formal contexts. Technical and developer terms are fine where the occasion calls for them.",
-      "tags": ["general", "writer"],
+      "rule_text": "When helping me write, use plain, common words over fancy vocabulary, even in formal contexts. Technical terms are fine when needed.",
+      "tags": [
+        "general",
+        "writer"
+      ],
       "default_on": false
     },
     {
@@ -462,8 +583,10 @@
       "subcategory": "domain-specific",
       "label": "Suggest recipe substitutions",
       "description": "AI proactively mentions common substitutions for dietary restrictions.",
-      "rule_text": "When helping with recipes, proactively suggest common substitutions for dietary restrictions even if I didn't ask.",
-      "tags": ["cooking"],
+      "rule_text": "With recipes, suggest common substitutions for dietary restrictions unprompted.",
+      "tags": [
+        "cooking"
+      ],
       "default_on": false
     },
     {
@@ -473,8 +596,10 @@
       "subcategory": "domain-specific",
       "label": "Include form cues and injury risk",
       "description": "AI adds form guidance and injury notes when suggesting exercises.",
-      "rule_text": "When suggesting exercises or training plans, include form cues and note injury risks.",
-      "tags": ["fitness"],
+      "rule_text": "When suggesting exercises, include form cues and note injury risks.",
+      "tags": [
+        "fitness"
+      ],
       "default_on": false
     },
     {
@@ -484,8 +609,10 @@
       "subcategory": "domain-specific",
       "label": "Proactive travel advisories",
       "description": "AI flags visa requirements, safety advisories, and local customs when helping with travel.",
-      "rule_text": "When helping with travel planning, proactively mention visa requirements, safety advisories, and relevant local customs.",
-      "tags": ["travel"],
+      "rule_text": "For travel planning, mention visa requirements, safety advisories, and local customs.",
+      "tags": [
+        "travel"
+      ],
       "default_on": false
     },
     {
@@ -495,8 +622,12 @@
       "subcategory": "domain-specific",
       "label": "Distinguish health science from trends",
       "description": "AI separates established research from popular but unverified health claims.",
-      "rule_text": "When discussing nutrition, fitness, or health, distinguish between established science and trending opinion or anecdotal claims.",
-      "tags": ["fitness", "healthcare", "general"],
+      "rule_text": "On nutrition, fitness, or health, separate established science from trending or anecdotal claims.",
+      "tags": [
+        "fitness",
+        "healthcare",
+        "general"
+      ],
       "default_on": false
     },
     {
@@ -506,8 +637,10 @@
       "subcategory": "voice-dictation",
       "label": "Keep voice answers short",
       "description": "In voice mode, AI stays brief and conversational instead of long-winded.",
-      "rule_text": "In voice or dictation mode, keep answers concise and conversational. Don't give long-winded responses meant for reading on a screen.",
-      "tags": ["general"],
+      "rule_text": "In voice mode, keep answers short and conversational — not long-winded responses meant for reading.",
+      "tags": [
+        "general"
+      ],
       "default_on": false
     },
     {
@@ -517,8 +650,10 @@
       "subcategory": "voice-dictation",
       "label": "Flag content that's better read as text",
       "description": "In voice mode, AI gives the short version and tells you when links, code, or data are better viewed in text.",
-      "rule_text": "In voice or dictation mode, if a response would include URLs, code, tables, or long data, don't read it all aloud — give me the short version and tell me there's more that's better viewed in text mode.",
-      "tags": ["general"],
+      "rule_text": "In voice mode, don't read out URLs, code, tables, or long data — give the short version and tell me to switch to text for the rest.",
+      "tags": [
+        "general"
+      ],
       "default_on": false
     },
     {
@@ -528,8 +663,10 @@
       "subcategory": "voice-dictation",
       "label": "Don't read out formatting symbols",
       "description": "In voice mode, AI skips speaking markup and punctuation that adds no spoken meaning.",
-      "rule_text": "In voice or dictation mode, don't read out formatting symbols or markup that add no spoken meaning — such as asterisks, hashes, bullet characters, or backticks. Speak only the actual content.",
-      "tags": ["general"],
+      "rule_text": "In voice mode, don't read out formatting symbols like asterisks, hashes, bullets, or backticks — speak only the content.",
+      "tags": [
+        "general"
+      ],
       "default_on": false
     }
   ]
