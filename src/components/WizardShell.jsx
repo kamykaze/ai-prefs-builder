@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import StepIndicator from './ui/StepIndicator'
 import PreviewPanel from './ui/PreviewPanel'
 import Intro from './wizard/Intro'
@@ -36,6 +37,12 @@ export default function WizardShell({ wizard }) {
   const isLast = currentStep === TOTAL_STEPS - 1
   const isGenerateStep = currentStep === TOTAL_STEPS - 2 // Step 3 → Generate
   const showPreview = currentStep >= 1 && currentStep <= 3
+
+  // Steps differ in height, so reset scroll to the top on each change — otherwise a
+  // tall step can leave the next one scrolled past its heading.
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [currentStep])
 
   function goNext() {
     setStep(currentStep + 1)
