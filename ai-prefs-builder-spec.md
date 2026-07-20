@@ -84,7 +84,6 @@ Used to filter which Best Practices are shown in Step 2. Does not generate any r
 | Profession | Multi-select chips | Developer · Designer · Writer / Content Creator · Researcher / Academic · Business / Manager · Marketer · Healthcare · Legal · Finance · Educator · Student · General / Casual |
 | Hobbies & interests | Multi-select chips | DIY / Maker · Cooking · Fitness · Travel · Photography · Music · Gaming · Sports · Reading · Technology |
 | Primary AI use cases | Multi-select chips | Coding · Research · Writing & editing · Planning & decisions · Learning · Creative work · General Q&A · Professional tasks |
-| Technical level | Single-select | Casual user · Intermediate · Developer / Technical |
 
 **Behavior:**
 - All fields optional. If nothing is selected, Step 2 shows all best practices (unfiltered).
@@ -117,6 +116,20 @@ Shown to everyone regardless of Step 0 selections. Organized into subcategory se
 - **Feedback style** (radio): Direct · Balanced · Gentle
 
 Default-on rules are pre-checked. Users can uncheck anything.
+
+**Rule aging (Steps 1 & 2).** Each rule card carries a small **pill** based on its `aging`
+class — `counterweight` → "Always needed" (green), `patch · active` → "AI improving"
+(amber), `patch · expiring` → "Often handled" (grey), `preference` → "Personal" (blue).
+The fuller explanation / `symptom` is the pill's hover tooltip, and a one-time **legend**
+in its own collapsible section (open by default) above the live preview — rule-picking
+steps only — explains what the pills mean, so the user reads it once instead of a sentence
+on every card. See `AgingLegend.jsx`. A **"I'm using a recent AI model"** toggle
+(default on, `modernModel` state) renders **only on Step 1** to avoid duplication, but its
+effect applies to Steps 1 and 2 alike — when on, `expiring` patches the user hasn't
+selected are tucked into a per-section "N rules newer AIs usually handle — show anyway"
+disclosure. The toggle only changes visibility, never selections or output. See
+`getAgingPill` / `agingPillClasses` / `AGING_LEGEND` / `isExpiringPatch` in
+`src/utils/ruleHelpers.js`.
 
 ---
 
@@ -153,7 +166,15 @@ If the user skipped Step 0, show all best practices.
 
 A plain `<textarea>` where users can type additional instructions — or a few facts about
 themselves that help AI respond the way they want (e.g. "I'm a non-native English speaker").
-These get appended to the bottom of the output blob as-is.
+This text is placed at the **top** of the output blob **verbatim as one block** —
+deliberately *not* parsed or split into per-line rules. It leads (rather than trailing the
+generated rules) so that if the pasted text exceeds a tool's character limit and gets
+truncated, the user's own words survive and a generic rule is lost instead. A static tool
+can't reliably merge free-form text with the generated rules; if a user's list is long, the
+optional "Shorten with AI" step (Step 4) hands the whole blob — custom text included — to
+their own AI, which folds everything together (and is told to keep the personal notes first
+and intact). So custom rules always work: verbatim by default, merged only if the user
+chooses to run the compaction prompt.
 
 - Placeholder text: *"e.g. I'm a non-native English speaker, so keep wording simple. Always respond in metric units. I use TickTick for my to-do lists."*
 - Character counter (soft limit guidance, not enforced — different AI tools have different limits)
@@ -170,6 +191,22 @@ These get appended to the bottom of the output blob as-is.
 - Read-only `<textarea>` or styled `<pre>` block showing the full generated text
 - **Copy to clipboard** button (shows "Copied!" confirmation for 2 seconds)
 - **Start over** button (resets all state, returns to Step 0)
+- Collapsible section: **"Too many rules? Shorten them with AI (optional)"** — a
+  compaction step for long lists. The output is a flat numbered list where every line is
+  read on every turn, so past ~15 lines related rules start to compete for attention. This
+  section shows a copy-pasteable *meta-prompt* (fixed plain-language instructions +
+  the user's generated blob) that the user runs once in Claude/ChatGPT/Gemini; the AI
+  merges related rules into a tighter set with the same meaning, which the user pastes into
+  their settings instead. No backend or API call — the tool only hands over the prompt.
+  The prompt tells the AI to merge overlapping rules, keep every intent, preserve the
+  user's conflict-group choices (don't reintroduce alternatives), keep any personal notes
+  first and intact, return the result in a code block (so numbers survive copy), and target
+  ≤15 lines. It deliberately does *not* impose a character target (that fights the line
+  goal); instead the section carries a plain note to check the result and trim if it's
+  still over ChatGPT's ~1,500-char limit.
+  Collapsed by default; **auto-expands** once the blob exceeds `COMPACTION_LINE_THRESHOLD`
+  (15) lines, and the section is styled with an amber tint in that state. See
+  `src/utils/compactionPrompt.js`.
 - Collapsible section: "Where do I paste this?" with platform-specific instructions:
   - Claude: Settings → Profile → "What preferences should Claude consider?"
   - ChatGPT: Click profile → Custom Instructions → "How would you like ChatGPT to respond?"
@@ -179,20 +216,24 @@ These get appended to the bottom of the output blob as-is.
 
 ## Output Format
 
-Flat numbered list. One rule per line. No section headers. No markdown.
+Custom rules from Step 3 come **first**, as a verbatim block (not split into numbered
+lines — see Step 3 rationale), then a blank line, then the generated rules as a flat
+numbered list — one rule per line, no section headers, no markdown. Custom rules lead so
+that if the pasted text exceeds a tool's limit and is truncated at the tail, a generic
+rule is lost rather than the user's own (which they'd immediately notice).
 
 **Example output:**
 ```
+I'm a non-native English speaker, so keep wording simple. Always respond in metric
+units. I use TickTick for my to-do lists.
+
 1. Prioritize factual accuracy over agreement. Correct me even if I seem confident.
 2. If you're unsure, say "I don't know" or "I'm uncertain because..." — don't fill gaps.
 3. Never invent citations, statistics, product names, or examples. If you can't verify it, say so.
 4. Don't start responses with compliments or affirmations. Get to the point.
 5. Keep responses concise. If the answer is short, keep it short. Don't pad.
 6. Before suggesting I build something custom, check if an existing tool already solves it.
-7. Always respond in Spanish.
 ```
-
-Custom rules from Step 3 are appended at the end after the generated rules.
 
 ---
 
@@ -205,7 +246,6 @@ Custom rules from Step 3 are appended at the end after the generated rules.
     professions: [],      // string[] of selected profession slugs
     hobbies: [],          // string[] of selected hobby slugs
     useCases: [],         // string[] of selected use case slugs
-    techLevel: null,      // "casual" | "intermediate" | "technical"
   },
 
   // Step 1 + 2
@@ -216,6 +256,11 @@ Custom rules from Step 3 are appended at the end after the generated rules.
 
   // Step 3
   customRules: "",        // raw string from textarea
+
+  // Step 1 + 2 display: "I'm using a recent AI model" toggle. When true, expiring
+  // patches are tucked behind a per-section disclosure. Display-only — never
+  // affects selections or output. Defaults true.
+  modernModel: true,
 
   // Navigation
   currentStep: 0,         // 0–4
@@ -237,15 +282,16 @@ Custom rules from Step 3 are appended at the end after the generated rules.
    - If not defined AND group has a default_option → add that option's rule_text
    - Otherwise → skip
 
-4. If customRules is not empty:
-   - Split by newline, trim each line, filter empty lines
-   - Append each as additional items
+4. Number the rule array starting at 1, joined with newlines.
 
-5. Number the full array starting at 1.
+5. If customRules is not empty:
+   - Trim outer whitespace but keep the user's internal line breaks
+   - Keep it as a single verbatim block — do NOT split into numbered lines (a static tool
+     can't safely break a multi-sentence instruction into separate rules; the optional
+     "Shorten with AI" step is where a model folds it in)
 
-6. Join with newline characters.
-
-7. Return final string.
+6. Join the custom block (first) and the numbered rules with a blank line between, and
+   return. Custom leads so a tail-truncated paste loses a generic rule, not the user's own.
 ```
 
 ---
@@ -265,12 +311,34 @@ Two types of entries: `"rule"` and `"conflict-group"`.
   "description": "One sentence — what problem does this fix?",
   "rule_text": "The actual instruction text that goes into the output blob.",
   "tags": ["universal"] ,
-  "default_on": true
+  "default_on": true,
+  "aging": "patch | counterweight | preference",
+  "patch_status": "active | expiring",
+  "symptom": "plain-language symptom (patches only)"
 }
 ```
 
 - `tags`: Use `["universal"]` for guardrails shown to everyone. For best practices, use profession/hobby slugs: `["developer", "designer", "maker"]`
 - `default_on`: `true` means pre-checked in the wizard
+- `aging`: how the rule ages across model generations (see below). Required on every rule
+  and conflict-group.
+  - `patch` — compensates for a model weakness; loses value as models improve. The UI
+    shows a plain "newer AIs are getting better at this…" note plus the `symptom`.
+  - `counterweight` — pushes against a persistent training incentive (agreeableness,
+    praise, filler), not a capability gap. Does **not** decay; UI shows a "still worth
+    keeping" note.
+  - `preference` — a fact about the user (style, values, context) no model can infer.
+    Timeless; no age note shown.
+- `patch_status` (patches only): `active` = model still needs it or the rule is
+  high-consequence (kept on); `expiring` = newer models mostly handle it (tucked behind
+  the "recent AI model" disclosure by default). Omit for counterweight/preference.
+- `symptom` (patches only): a short, non-technical description of what the user would
+  observe if they need the rule — powers the "Add it if you're seeing: …" copy.
+
+> **`aging` is orthogonal to `default_on`.** The class drives *copy and visibility*, never
+> the on/off default. High-consequence patches (fabricated sources, unflagged security,
+> made-up answers) are tagged `patch` + `active` and stay on — the aging tag must never
+> silently disarm a safety rule. Re-review `patch` tags per major model release.
 
 ### Conflict-group schema:
 ```json
@@ -282,6 +350,7 @@ Two types of entries: `"rule"` and `"conflict-group"`.
   "label": "Question shown to user (e.g. 'How detailed should responses be?')",
   "description": "One sentence explaining what this choice affects.",
   "tags": ["universal"],
+  "aging": "preference",
   "default_option": 1,
   "options": [
     {
@@ -292,6 +361,9 @@ Two types of entries: `"rule"` and `"conflict-group"`.
   ]
 }
 ```
+
+Conflict groups carry `aging` too (all current ones are `preference` — a choice
+between styles doesn't age). They never take `patch_status`/`symptom`.
 
 ---
 

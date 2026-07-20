@@ -1,10 +1,5 @@
 import Chip from '../ui/Chip'
-import {
-  PROFESSIONS,
-  HOBBIES,
-  USE_CASES,
-  TECH_LEVELS,
-} from '../../data/contextOptions'
+import { PROFESSIONS, HOBBIES, USE_CASES } from '../../data/contextOptions'
 
 /**
  * Step 0 — Personal Context. All fields optional; selections only filter which
@@ -24,11 +19,6 @@ export default function Step0Context({ wizard }) {
     setContext(field, next)
   }
 
-  // Single-select: pick a value, or clear it by re-clicking the active one.
-  function selectSingle(field, slug) {
-    setContext(field, context[field] === slug ? null : slug)
-  }
-
   return (
     <div className="space-y-8">
       <header>
@@ -43,7 +33,7 @@ export default function Step0Context({ wizard }) {
 
       <ChipField
         label="What do you do?"
-        hint="Pick any that apply."
+        hint="Pick any that apply. We show or hide rules depending on your role."
         options={PROFESSIONS}
         selected={context.professions}
         onToggle={(slug) => toggleMulti('professions', slug)}
@@ -51,7 +41,7 @@ export default function Step0Context({ wizard }) {
 
       <ChipField
         label="Hobbies & interests"
-        hint="Pick any that apply."
+        hint="Pick any that apply. We suggest practical rules for the things you do."
         options={HOBBIES}
         selected={context.hobbies}
         onToggle={(slug) => toggleMulti('hobbies', slug)}
@@ -59,26 +49,11 @@ export default function Step0Context({ wizard }) {
 
       <ChipField
         label="What do you mainly use AI for?"
-        hint="Pick any that apply."
+        hint="Pick any that apply. This tailors which best-practice rules we recommend."
         options={USE_CASES}
         selected={context.useCases}
         onToggle={(slug) => toggleMulti('useCases', slug)}
       />
-
-      <fieldset>
-        <legend className="font-medium text-slate-900">How technical are you?</legend>
-        <p className="mb-3 text-sm text-slate-500">Pick one.</p>
-        <div className="flex flex-wrap gap-2">
-          {TECH_LEVELS.map((option) => (
-            <Chip
-              key={option.slug}
-              label={option.label}
-              isSelected={context.techLevel === option.slug}
-              onClick={() => selectSingle('techLevel', option.slug)}
-            />
-          ))}
-        </div>
-      </fieldset>
     </div>
   )
 }

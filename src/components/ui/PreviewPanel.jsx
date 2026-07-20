@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import CopyButton from './CopyButton'
-import { classifyLength } from '../../utils/outputLength'
 
 /**
  * Live preview of the generated preferences blob. Updates in real time as the user
@@ -11,8 +10,7 @@ import { classifyLength } from '../../utils/outputLength'
  */
 export default function PreviewPanel({ wizard, collapsible = false }) {
   const output = useMemo(() => wizard.generateOutput(), [wizard.generateOutput])
-  const count = output ? output.split('\n').length : 0
-  const { count: charCount, tone } = classifyLength(output)
+  const count = output ? output.split('\n').filter((l) => l.trim() !== '').length : 0
 
   const body = (
     <>
@@ -39,11 +37,7 @@ export default function PreviewPanel({ wizard, collapsible = false }) {
         <summary className="cursor-pointer font-semibold text-slate-900">
           Live preview{' '}
           <span className="font-normal text-slate-400">
-            ({count} {count === 1 ? 'preference' : 'preferences'} ·{' '}
-            <span className={tone === 'over' ? 'text-amber-700' : undefined}>
-              {charCount.toLocaleString()} chars
-            </span>
-            )
+            ({count} {count === 1 ? 'line' : 'lines'})
           </span>
         </summary>
         <div className="mt-3">{body}</div>
@@ -56,10 +50,7 @@ export default function PreviewPanel({ wizard, collapsible = false }) {
       <div className="mb-3 flex items-baseline justify-between">
         <h2 className="font-semibold text-slate-900">Live preview</h2>
         <span className="text-sm text-slate-400">
-          {count} {count === 1 ? 'preference' : 'preferences'} ·{' '}
-          <span className={tone === 'over' ? 'text-amber-700' : undefined}>
-            {charCount.toLocaleString()} chars
-          </span>
+          {count} {count === 1 ? 'line' : 'lines'}
         </span>
       </div>
       {body}

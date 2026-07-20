@@ -41,9 +41,3 @@ export const USE_CASES = [
   { slug: 'general-qa', label: 'General Q&A' },
   { slug: 'professional', label: 'Professional tasks' },
 ]
-
-export const TECH_LEVELS = [
-  { slug: 'casual', label: 'Casual user' },
-  { slug: 'intermediate', label: 'Intermediate' },
-  { slug: 'technical', label: 'Developer / Technical' },
-]

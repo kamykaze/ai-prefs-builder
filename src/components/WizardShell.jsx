@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import StepIndicator from './ui/StepIndicator'
 import PreviewPanel from './ui/PreviewPanel'
+import AgingLegend from './ui/AgingLegend'
 import Intro from './wizard/Intro'
 import Step0Context from './wizard/Step0_Context'
 import Step1Guardrails from './wizard/Step1_Guardrails'
@@ -37,6 +38,7 @@ export default function WizardShell({ wizard }) {
   const isLast = currentStep === TOTAL_STEPS - 1
   const isGenerateStep = currentStep === TOTAL_STEPS - 2 // Step 3 → Generate
   const showPreview = currentStep >= 1 && currentStep <= 3
+  const showLegend = currentStep === 1 || currentStep === 2 // aging pills live here
 
   // Steps differ in height, so reset scroll to the top on each change — otherwise a
   // tall step can leave the next one scrolled past its heading.
@@ -95,11 +97,17 @@ export default function WizardShell({ wizard }) {
             totalSteps={TOTAL_STEPS}
             onStepClick={setStep}
           />
+          {showLegend && <AgingLegend />}
           {showPreview && <PreviewPanel wizard={wizard} />}
         </aside>
 
         <div>
-          {/* Collapsible preview for narrow screens, above the form. */}
+          {/* Legend + collapsible preview for narrow screens, above the form. */}
+          {showLegend && (
+            <div className="mb-4 lg:hidden">
+              <AgingLegend />
+            </div>
+          )}
           {showPreview && (
             <div className="mb-4 lg:hidden">
               <PreviewPanel wizard={wizard} collapsible />

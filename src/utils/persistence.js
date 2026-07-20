@@ -29,6 +29,8 @@ export function loadState() {
         typeof parsed.customRules === 'string' ? parsed.customRules : undefined,
       currentStep:
         typeof parsed.currentStep === 'number' ? parsed.currentStep : undefined,
+      modernModel:
+        typeof parsed.modernModel === 'boolean' ? parsed.modernModel : undefined,
     }
   } catch {
     return null

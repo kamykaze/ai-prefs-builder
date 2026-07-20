@@ -44,6 +44,84 @@ export function groupBySubcategory(entries) {
   return order.map((subcategory) => ({ subcategory, entries: map.get(subcategory) }))
 }
 
+// Aging shows up as a small pill on each rule (see rule-classification-draft.md). We
+// never show the raw words "patch/counterweight" — the pill label + the legend above the
+// live preview explain what it means. Preferences get no pill.
+const COUNTERWEIGHT_TITLE =
+  'AIs are trained to please — it shows up as agreement, praise, or filler. This pushes back, and stays worth keeping as models improve.'
+const PREFERENCE_TITLE =
+  'A personal preference — no AI can infer it, so keep it as long as you want it.'
+
+/** True for a patch that newer models mostly handle (candidate for collapsing). */
+export function isExpiringPatch(entry) {
+  return (
+    entry.type === 'rule' &&
+    entry.aging === 'patch' &&
+    entry.patch_status === 'expiring'
+  )
+}
+
+/** Tailwind classes for an aging pill / legend swatch, keyed by tone. */
+export function agingPillClasses(tone) {
+  switch (tone) {
+    case 'counterweight':
+      return 'border-emerald-200 bg-emerald-50 text-emerald-700'
+    case 'patch-active':
+      return 'border-amber-200 bg-amber-50 text-amber-700'
+    case 'patch-expiring':
+      return 'border-slate-200 bg-slate-100 text-slate-500'
+    case 'preference':
+      return 'border-sky-200 bg-sky-50 text-sky-700'
+    default:
+      return 'border-slate-200 bg-slate-50 text-slate-500'
+  }
+}
+
+// One-time legend describing the pills; rendered above the live preview.
+export const AGING_LEGEND = [
+  {
+    tone: 'counterweight',
+    label: 'Always needed',
+    description: 'Counters habits AIs keep no matter how much they improve, like agreeing with you.',
+  },
+  {
+    tone: 'patch-active',
+    label: 'AI improving',
+    description: 'Newer AIs are getting better at this, but not reliably yet.',
+  },
+  {
+    tone: 'patch-expiring',
+    label: 'Often handled',
+    description: 'Newer AIs usually do this already — add only if you need it.',
+  },
+  {
+    tone: 'preference',
+    label: 'Personal',
+    description: 'A personal choice no AI can infer — keep it as long as you want it.',
+  },
+]
+
+/**
+ * The aging pill for a rule, or null (conflict-groups get none — they render their own
+ * card). `title` is the fuller explanation, surfaced as a hover tooltip.
+ * @returns {{ tone: string, label: string, title: string } | null}
+ */
+export function getAgingPill(entry) {
+  if (entry.type !== 'rule') return null
+  if (entry.aging === 'counterweight') {
+    return { tone: 'counterweight', label: 'Always needed', title: COUNTERWEIGHT_TITLE }
+  }
+  if (entry.aging === 'patch') {
+    const expiring = entry.patch_status === 'expiring'
+    return {
+      tone: expiring ? 'patch-expiring' : 'patch-active',
+      label: expiring ? 'Often handled' : 'AI improving',
+      title: entry.symptom ? `Add it if you’re seeing: ${entry.symptom}` : '',
+    }
+  }
+  return { tone: 'preference', label: 'Personal', title: PREFERENCE_TITLE }
+}
+
 /** The set of rule ids that should start toggled on (default_on === true). */
 export function getDefaultOnRuleIds() {
   return new Set(

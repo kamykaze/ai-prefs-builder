@@ -1,6 +1,11 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import CopyButton from '../ui/CopyButton'
 import { CHATGPT_LIMIT, classifyLength } from '../../utils/outputLength'
+import {
+  COMPACTION_LINE_THRESHOLD,
+  buildCompactionPrompt,
+  countRuleLines,
+} from '../../utils/compactionPrompt'
 
 const PASTE_INSTRUCTIONS = [
   {
@@ -34,6 +39,13 @@ export default function Step4Output({ wizard }) {
   const { generateOutput, reset } = wizard
   const output = useMemo(() => generateOutput(), [generateOutput])
   const { count, tone } = classifyLength(output)
+
+  const lineCount = countRuleLines(output)
+  const isLong = lineCount > COMPACTION_LINE_THRESHOLD
+  const compactionPrompt = buildCompactionPrompt(output)
+  // Auto-expand the compaction step once the list is long enough to compete for
+  // attention; stays user-controllable after that.
+  const [compactionOpen, setCompactionOpen] = useState(isLong)
 
   return (
     <div className="space-y-6">
@@ -69,13 +81,8 @@ export default function Step4Output({ wizard }) {
             <p className="mt-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
               This is over ChatGPT’s ~{CHATGPT_LIMIT.toLocaleString()}-character
               custom-instructions limit. It still fits Claude, Gemini, Grok, and most
-              others — for ChatGPT, deselect a few rules or trim your custom text, or
-              paste it at the start of a chat instead.
-            </p>
-          )}
-          {tone === 'near' && (
-            <p className="mt-1 text-right text-sm text-slate-400">
-              Getting close to ChatGPT’s ~{CHATGPT_LIMIT.toLocaleString()}-character limit.
+              others — and the <span className="font-medium">“Shorten them with AI”</span>{' '}
+              step below can compress it to fit.
             </p>
           )}
         </div>
@@ -91,6 +98,40 @@ export default function Step4Output({ wizard }) {
           Start over
         </button>
       </div>
+
+      {output && (
+        <details
+          open={compactionOpen}
+          onToggle={(e) => setCompactionOpen(e.currentTarget.open)}
+          className={`rounded-lg border p-4 ${
+            isLong ? 'border-amber-200 bg-amber-50' : 'border-slate-200 bg-white'
+          }`}
+        >
+          <summary className="cursor-pointer font-medium text-slate-900">
+            Too many rules? Shorten them with AI{' '}
+            <span className="font-normal text-slate-500">(optional)</span>
+          </summary>
+          <p className="mt-3 text-sm text-slate-600">
+            You’ve selected {lineCount} {lineCount === 1 ? 'rule' : 'rules'}. Each one is
+            read every time you talk to your AI, and long lists start to compete for
+            attention. Paste the prompt below into Claude, ChatGPT, or Gemini — it merges
+            related rules into a tighter set with the same meaning. Paste{' '}
+            <em>that</em> result into your settings instead.
+          </p>
+          <pre className="mt-3 max-h-72 overflow-auto whitespace-pre-wrap rounded-lg border border-slate-200 bg-white p-4 text-sm leading-relaxed text-slate-800">
+            {compactionPrompt}
+          </pre>
+          <div className="mt-3">
+            <CopyButton text={compactionPrompt} label="Copy prompt" />
+          </div>
+          <p className="mt-3 border-t border-slate-100 pt-3 text-sm text-slate-500">
+            After compacting, check the result’s length. If it’s still over ChatGPT’s ~
+            {CHATGPT_LIMIT.toLocaleString()}-character limit, trim a rule or two — ChatGPT
+            can cut off whatever runs over. (Claude, Gemini, and most others have far more
+            room.)
+          </p>
+        </details>
+      )}
 
       <details className="rounded-lg border border-slate-200 bg-white p-4">
         <summary className="cursor-pointer font-medium text-slate-900">

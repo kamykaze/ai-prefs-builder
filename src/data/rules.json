@@ -11,7 +11,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": true
+      "default_on": true,
+      "aging": "counterweight"
     },
     {
       "id": "guard-antisyc-assumptions",
@@ -24,7 +25,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "counterweight"
     },
     {
       "id": "guard-antisyc-no-grade-inflate",
@@ -37,7 +39,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "counterweight"
     },
     {
       "id": "guard-antisyc-hold-ground",
@@ -50,7 +53,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "counterweight"
     },
     {
       "id": "guard-antisyc-opposing-views",
@@ -63,7 +67,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "counterweight"
     },
     {
       "id": "guard-antisyc-no-apology",
@@ -76,7 +81,10 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "expiring",
+      "symptom": "the AI keeps apologizing when it corrects you"
     },
     {
       "id": "guard-halluc-admit-uncertainty",
@@ -89,7 +97,10 @@
       "tags": [
         "universal"
       ],
-      "default_on": true
+      "default_on": true,
+      "aging": "patch",
+      "patch_status": "active",
+      "symptom": "the AI makes up an answer instead of admitting it doesn't know"
     },
     {
       "id": "guard-halluc-ask-when-ambiguous",
@@ -102,7 +113,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "guard-halluc-confidence-levels",
@@ -115,7 +127,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "guard-halluc-no-fabrication",
@@ -128,7 +141,10 @@
       "tags": [
         "universal"
       ],
-      "default_on": true
+      "default_on": true,
+      "aging": "patch",
+      "patch_status": "active",
+      "symptom": "you've caught the AI inventing sources, quotes, or numbers"
     },
     {
       "id": "guard-halluc-reason-first",
@@ -141,7 +157,10 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "expiring",
+      "symptom": "answers jump to a conclusion and get it wrong"
     },
     {
       "id": "guard-halluc-flag-outdated",
@@ -154,7 +173,10 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "active",
+      "symptom": "the AI states old facts as if they're current"
     },
     {
       "id": "guard-emot-empathy-no-cave",
@@ -167,7 +189,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "counterweight"
     },
     {
       "id": "guard-emot-venting-vs-argument",
@@ -180,7 +203,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "guard-emot-no-mirror-framing",
@@ -193,7 +217,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "counterweight"
     },
     {
       "id": "guard-flat-no-opener",
@@ -206,7 +231,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": true
+      "default_on": true,
+      "aging": "counterweight"
     },
     {
       "id": "guard-flat-no-filler",
@@ -219,7 +245,8 @@
       "tags": [
         "universal"
       ],
-      "default_on": true
+      "default_on": true,
+      "aging": "counterweight"
     },
     {
       "id": "cg-response-depth",
@@ -253,7 +280,8 @@
           "description": "Skip this — don’t add a rule for it.",
           "rule_text": ""
         }
-      ]
+      ],
+      "aging": "preference"
     },
     {
       "id": "cg-feedback-style",
@@ -287,7 +315,8 @@
           "description": "Skip this — don’t add a rule for it.",
           "rule_text": ""
         }
-      ]
+      ],
+      "aging": "preference"
     },
     {
       "id": "bp-research-before-build",
@@ -302,7 +331,8 @@
         "designer",
         "maker"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-prefer-standard-solutions",
@@ -315,7 +345,8 @@
       "tags": [
         "developer"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-suggest-alternatives",
@@ -331,7 +362,8 @@
         "business",
         "manager"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-check-availability",
@@ -346,7 +378,10 @@
         "business",
         "finance"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "active",
+      "symptom": "the AI recommends products without noting prices or availability change"
     },
     {
       "id": "bp-verify-live-data",
@@ -362,7 +397,10 @@
         "general",
         "developer"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "active",
+      "symptom": "the AI gives prices or rates as if they are current"
     },
     {
       "id": "bp-check-relative-time",
@@ -375,7 +413,10 @@
       "tags": [
         "general"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "expiring",
+      "symptom": "the AI guesses what “today” or “this week” means"
     },
     {
       "id": "bp-flag-stale-apis",
@@ -388,7 +429,10 @@
       "tags": [
         "developer"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "active",
+      "symptom": "the AI suggests code against outdated library versions"
     },
     {
       "id": "bp-flag-policy-changes",
@@ -404,7 +448,10 @@
         "finance",
         "general"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "active",
+      "symptom": "the AI states rules or regulations that may have changed"
     },
     {
       "id": "bp-flag-security",
@@ -417,7 +464,10 @@
       "tags": [
         "developer"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "active",
+      "symptom": "the AI writes code without mentioning security risks"
     },
     {
       "id": "bp-question-methodology",
@@ -432,7 +482,8 @@
         "academic",
         "developer"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-accessibility",
@@ -446,7 +497,8 @@
         "designer",
         "developer"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-steelman",
@@ -463,7 +515,8 @@
         "writer",
         "general"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-name-financial-assumptions",
@@ -477,7 +530,8 @@
         "finance",
         "business"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-flag-legal-jurisdiction",
@@ -491,7 +545,10 @@
         "legal",
         "general"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "expiring",
+      "symptom": "the AI gives legal info without noting it varies by location"
     },
     {
       "id": "bp-explain-the-why",
@@ -507,7 +564,8 @@
         "developer",
         "general"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-learn-summarize-new",
@@ -523,7 +581,8 @@
         "student",
         "researcher"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "cg-learning-mode",
@@ -559,7 +618,8 @@
           "description": "Skip this — don’t add a rule for it.",
           "rule_text": ""
         }
-      ]
+      ],
+      "aging": "preference"
     },
     {
       "id": "bp-write-own-voice",
@@ -573,7 +633,8 @@
         "general",
         "writer"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-write-plain-language",
@@ -587,7 +648,8 @@
         "general",
         "writer"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-recipe-substitutions",
@@ -600,7 +662,8 @@
       "tags": [
         "cooking"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-fitness-form-safety",
@@ -613,7 +676,8 @@
       "tags": [
         "fitness"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-travel-advisories",
@@ -626,7 +690,8 @@
       "tags": [
         "travel"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-health-cite-sources",
@@ -641,7 +706,8 @@
         "healthcare",
         "general"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-voice-concise",
@@ -654,7 +720,8 @@
       "tags": [
         "general"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-voice-flag-text",
@@ -667,7 +734,8 @@
       "tags": [
         "general"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "preference"
     },
     {
       "id": "bp-voice-no-symbols",
@@ -680,7 +748,10 @@
       "tags": [
         "general"
       ],
-      "default_on": false
+      "default_on": false,
+      "aging": "patch",
+      "patch_status": "expiring",
+      "symptom": "the AI reads out asterisks, hashes, or backticks aloud"
     }
   ]
 }

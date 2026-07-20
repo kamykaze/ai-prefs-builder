@@ -36,6 +36,14 @@ The wizard is a single page with five steps:
 3. **Custom** — your own free-text rules, appended verbatim.
 4. **Output** — the generated, numbered preferences block with a copy button.
 
+On the Output step, long lists get an optional **"Shorten them with AI"** step. Because
+the block is a flat numbered list that your AI reads on every turn, a long list of rules
+starts to compete for attention. This step hands you a copy-pasteable prompt (plain
+instructions plus your own rules) that you run once in Claude, ChatGPT, or Gemini — the AI
+merges overlapping rules into a tighter set with the same meaning, which you paste into
+your settings instead. The tool never calls an AI itself; it only builds the prompt. The
+section auto-expands once your list passes ~15 lines.
+
 As you make selections, a **live preview** of the generated blob updates in real time
 (side panel on wide screens, a collapsible panel on mobile) so you can see exactly what's
 being added. Your selections are saved in the browser's `localStorage`, so refreshing or
@@ -58,6 +66,15 @@ Quick reference:
 - `tags`: `["universal"]` for guardrails; profession/hobby/use-case slugs (or
   `"general"`) for best practices, which drive the Step 2 filtering
 - `default_on`: `true` pre-checks the rule in the wizard
+- `aging`: how the rule ages as AI models improve — `preference` (a fact about the user;
+  timeless), `counterweight` (fights a persistent training habit like agreeableness;
+  doesn't decay), or `patch` (compensates for a model weakness; fades over time). Patches
+  also take `patch_status` (`active` or `expiring`) and a plain-language `symptom`. This
+  drives the small per-rule pill (explained by a one-time legend above the live preview)
+  and the "I'm using a recent AI model" toggle, which tucks away `expiring` patches.
+  **`aging` never changes whether a rule is on by default** — that
+  stays curated via `default_on`, so a high-consequence patch (fabrication, security)
+  stays on. Re-review `patch` tags after each major model release.
 
 ## Tech stack
 

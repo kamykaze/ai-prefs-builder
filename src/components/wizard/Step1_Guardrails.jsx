@@ -9,7 +9,14 @@ const GUARDRAILS = getGuardrails()
  * Props: wizard (the useWizardState object)
  */
 export default function Step1Guardrails({ wizard }) {
-  const { selectedRuleIds, conflictSelections, toggleRule, setConflictSelection } = wizard
+  const {
+    selectedRuleIds,
+    conflictSelections,
+    toggleRule,
+    setConflictSelection,
+    modernModel,
+    setModernModel,
+  } = wizard
 
   return (
     <div className="space-y-6">
@@ -29,6 +36,9 @@ export default function Step1Guardrails({ wizard }) {
         conflictSelections={conflictSelections}
         onToggle={toggleRule}
         onSelect={setConflictSelection}
+        modernModel={modernModel}
+        onModernModelChange={setModernModel}
+        showModernToggle
       />
     </div>
   )

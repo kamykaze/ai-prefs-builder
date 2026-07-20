@@ -15,6 +15,8 @@ export default function Step2BestPractices({ wizard }) {
     conflictSelections,
     toggleRule,
     setConflictSelection,
+    modernModel,
+    setModernModel,
   } = wizard
 
   const entries = useMemo(() => getBestPracticesForUser(context), [context])
@@ -38,6 +40,8 @@ export default function Step2BestPractices({ wizard }) {
           conflictSelections={conflictSelections}
           onToggle={toggleRule}
           onSelect={setConflictSelection}
+          modernModel={modernModel}
+          onModernModelChange={setModernModel}
         />
       ) : (
         <p className="rounded-lg border border-slate-200 bg-white p-4 text-slate-500">

@@ -4,16 +4,21 @@ import { rules } from '../data/rules.json'
  * Assembles the final preferences text blob from the user's selections.
  *
  * Order (per spec):
- *   1. Selected individual rules (in rules.json order)
- *   2. Conflict-group selections (explicit choice, else default_option, else skip)
- *   3. Custom rules (split by newline, trimmed, empties dropped)
- * The combined list is numbered from 1 and joined with newlines.
+ *   1. Custom rules — the user's own words — as a verbatim block (their line breaks
+ *      preserved), NOT split into numbered lines.
+ *   2. Selected individual rules (in rules.json order), numbered from 1.
+ *   3. Conflict-group selections (explicit choice, else default_option, else skip).
+ * Custom rules lead so that if the pasted text ever exceeds a tool's limit and gets
+ * truncated at the tail, it's a generic rule that's lost — not the user's own, which
+ * they'd immediately notice. This tool is static and can't safely break a
+ * multi-sentence instruction into separate rules; the optional "Shorten with AI" step
+ * is where a user's model folds custom text into the rest.
  *
  * @param {Object}   selections
  * @param {Set<string>} selections.selectedRuleIds   ids of toggled-on rules
  * @param {Object}   selections.conflictSelections   { [groupId]: optionIndex }
  * @param {string}   selections.customRules           raw textarea string
- * @returns {string} the numbered preferences blob
+ * @returns {string} the preferences blob
  */
 export function generateOutput({ selectedRuleIds, conflictSelections, customRules }) {
   const lines = []
@@ -40,13 +45,9 @@ export function generateOutput({ selectedRuleIds, conflictSelections, customRule
     }
   }
 
-  if (customRules && customRules.trim() !== '') {
-    const customLines = customRules
-      .split('\n')
-      .map((line) => line.trim())
-      .filter((line) => line !== '')
-    lines.push(...customLines)
-  }
+  const numbered = lines.map((text, i) => `${i + 1}. ${text}`).join('\n')
+  const custom = customRules && customRules.trim() !== '' ? customRules.trim() : ''
 
-  return lines.map((text, i) => `${i + 1}. ${text}`).join('\n')
+  // Custom block first, then a blank line, then the numbered rules.
+  return [custom, numbered].filter(Boolean).join('\n\n')
 }

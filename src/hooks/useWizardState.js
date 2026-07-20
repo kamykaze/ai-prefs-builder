@@ -7,7 +7,6 @@ const initialContext = {
   professions: [],
   hobbies: [],
   useCases: [],
-  techLevel: null,
 }
 
 /**
@@ -32,6 +31,10 @@ export function useWizardState() {
   )
   const [customRules, setCustomRules] = useState(() => persisted?.customRules ?? '')
   const [currentStep, setCurrentStep] = useState(() => persisted?.currentStep ?? 0)
+  // "I'm using a recent AI model" — when on, rules newer models mostly handle
+  // (expiring patches) are tucked into a disclosure instead of shown inline.
+  // Defaults on. Doesn't touch selections or output — display only.
+  const [modernModel, setModernModel] = useState(() => persisted?.modernModel ?? true)
 
   // Persist on every change. The Set is serialized as an array.
   useEffect(() => {
@@ -41,8 +44,16 @@ export function useWizardState() {
       conflictSelections,
       customRules,
       currentStep,
+      modernModel,
     })
-  }, [context, selectedRuleIds, conflictSelections, customRules, currentStep])
+  }, [
+    context,
+    selectedRuleIds,
+    conflictSelections,
+    customRules,
+    currentStep,
+    modernModel,
+  ])
 
   // Step 0 updates one context field at a time (e.g. setContext('professions', [...])).
   const setContext = useCallback((field, value) => {
@@ -76,6 +87,7 @@ export function useWizardState() {
     setConflictSelections({})
     setCustomRules('')
     setCurrentStep(0)
+    setModernModel(true)
   }, [])
 
   const generateOutput = useCallback(
@@ -91,12 +103,14 @@ export function useWizardState() {
       conflictSelections,
       customRules,
       currentStep,
+      modernModel,
       // actions
       setContext,
       toggleRule,
       setConflictSelection,
       setCustomRules,
       setStep,
+      setModernModel,
       reset,
       generateOutput,
     }),
@@ -106,6 +120,7 @@ export function useWizardState() {
       conflictSelections,
       customRules,
       currentStep,
+      modernModel,
       setContext,
       toggleRule,
       setConflictSelection,

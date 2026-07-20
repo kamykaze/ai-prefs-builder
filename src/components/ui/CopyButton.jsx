@@ -5,9 +5,9 @@ import { useState } from 'react'
  * Falls back to a hidden textarea + execCommand when the async Clipboard API
  * isn't available (older browsers, non-secure contexts).
  *
- * Props: text
+ * Props: text, label (idle button text — defaults to "Copy to clipboard")
  */
-export default function CopyButton({ text }) {
+export default function CopyButton({ text, label = 'Copy to clipboard' }) {
   const [copied, setCopied] = useState(false)
 
   async function handleCopy() {
@@ -24,7 +24,7 @@ export default function CopyButton({ text }) {
       onClick={handleCopy}
       className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-indigo-700"
     >
-      {copied ? 'Copied ✓' : 'Copy to clipboard'}
+      {copied ? 'Copied ✓' : label}
     </button>
   )
 }
